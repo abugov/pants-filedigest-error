@@ -1,3 +1,10 @@
+--- helpful commands
+kill -9 `pgrep -f "[p]ants"`
+kill -9 `pgrep -f "[s]cala-compiler"`
+rm -rf ~/.cache/pants/
+rm -rf .pids
+
+--- file figest error
 $ ./pants generate-lockfiles && ./pants check ::
 09:50:58.26 [INFO] Wrote lockfile for the resolve `jvm-default` to 3rdparty/jvm/default.lock
 09:50:58.81 [ERROR] 1 Exception encountered:
@@ -52,5 +59,13 @@ rm -rf \
 
 # kill pants server didn't help
 
-# tried this without kill server:
-$ rm -rf /Users/abugov/.cache/pants/
+# deleting the whole cache (including lmdb_store) didn't help: $ rm -rf /Users/abugov/.cache/pants/
+
+
+--- stack overflow error
+this seems to solve the problem:
+JAVA_OPTS="-Xss1G" ./pants --no-pantsd check ::
+
+JAVA_OPTS="-Xss1G" ./pants --no-pantsd generate-lockfiles
+    from some reason this "has no effect", when running 'pants check' afterwards it will error "Run `./pants generate-lockfiles` to update your lockfile based on the new requirements."
+
