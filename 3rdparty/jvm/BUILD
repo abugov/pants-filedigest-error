@@ -1,0 +1,15 @@
+jvm_artifact(
+  name="org.scala-lang-scala-library",
+  group="org.scala-lang",
+  artifact="scala-library",
+  version="2.13.6",
+  packages=["scala.**"],
+)
+jvm_artifact(
+  name="com.lihaoyi-upickle-core",
+  group="com.lihaoyi",
+  artifact="upickle-core_2.13",
+  jar="../../lib/upickle-core_2.13.jar",
+  version="1.5.0-1-fc17a6",
+  packages=["upickle.core.**"],
+)
